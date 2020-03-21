@@ -17,12 +17,18 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
+from registration.views import activation_sent_view, activate
 
 urlpatterns = [
     path('', include('registration.urls')),
     path('drive/', include('drive_data.urls')),
     # path('', include('accounts.urls')),
     path('admin/', admin.site.urls),
+	path('accounts/',include('allauth.urls')),
+	# path('admin/', admin.site.urls),
+    path('sent/', activation_sent_view, name="activation_sent"),
+    path('activate/<slug:uidb64>/<slug:token>/', activate, name='activate'),
+
 ]
 
 if settings.DEBUG:

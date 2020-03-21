@@ -1,10 +1,21 @@
-{% extends 'registration/index.html' %}
 
+
+{% extends 'registration/index.html' %}
+{% block title %}Create an account{% endblock %}
 {% block content %}
         <h1>Create New Account</h1>
-        <form method = "POST">
+        <form method = "POST" action="">
         {% csrf_token %}
-             {{ form.as_p }}
-            <button type="submit">Register</button>
+            {% for field in form %}
+                <p>
+                {{ field.label_tag }}<br>
+                {{ field }}
+                {% for error in field.errors %}
+                    <p style="color:red">{{ error }}</p>
+                {% endfor %}
+                </p>
+            {% endfor %}
+            <button type="submit">Signup</button>
         </form>
 {% endblock %}
+

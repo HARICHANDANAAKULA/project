@@ -38,13 +38,19 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'django.contrib.sites',
 	'django.contrib.humanize',
 	'base',
 	'registration',
-	'accounts',
 	'drive_data',
 	'crispy_forms',
 	'django_cleanup',  # for file/folder delete
+	'six',
+	'allauth',
+	'allauth.account',
+	'allauth.socialaccount',
+	'allauth.socialaccount.providers.google',
+
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -128,3 +134,24 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'registration.User'
 
 LOGIN_REDIRECT_URL = '/drive/'
+# LOGIN_REDIRECT_URL = '/dashboard/'
+# LOGOUT_REDIRECT_URL= '/'
+# REST_SOCIAL_OAUTH_REDIRECT_URI = '/'
+# REST_SOCIAL_DOMAIN_FROM_ORIGIN = True
+
+AUTHENTICATION_BACKENDS = {
+	'django.contrib.auth.backends.ModelBackend',
+	'allauth.account.auth_backends.AuthenticationBackend',
+}
+SITE_ID=1
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_ACTIVATION_DAYS = 7
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'harichandana.a18@iiits.in'
+EMAIL_HOST_PASSWORD = 'yvpflbwnviiygbpd'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 1025
